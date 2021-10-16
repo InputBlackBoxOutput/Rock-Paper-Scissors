@@ -6,12 +6,15 @@ import numpy as np
 from PIL import Image
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 
 import model
 
 api = Flask(__name__)
+cors = CORS(api)
 
 @api.route('/predict',methods=['POST'])
+@cross_origin()
 def predict():
 	image_data = str(request.data).split(",")[-1]
 	img = Image.open(BytesIO(base64.b64decode(image_data)))
@@ -23,6 +26,7 @@ def predict():
 	return jsonify({"predict": str(pred).lower()})	
 
 @api.route('/',methods=['GET'])
+@cross_origin()
 def root():
 	return jsonify({"success": 1})	
 
