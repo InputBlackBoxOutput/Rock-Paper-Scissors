@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rock Paper Scissors</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	    <label id="brand" class="navbar-brand">Rock Paper Scissors </label>
+	    <div class="navbar-collapse">
+	        <ul class="navbar-nav ml-auto">
+	            <label class="btn rounded btn-secondary mr-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
+	            <label class="btn rounded btn-secondary mr-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
+	        </ul>
+	    </div>
+	</nav>
+
+	<div class="container">
+		<div class="col">
+			<div class="row d-flex justify-content-center mt-3">
+				<span id="score-board" class="text-center mr-2">
+					Computer: <label class="mr-3" id="score-computer">0</label>
+					Player: <label id="score-player">0</label>
+				</span>
+				<button id='start' class="btn btn-lg btn-success mr-2">  Start </button>
+				<button id='stop' class="btn btn-lg btn-danger mr-2"> Stop </button>
+			</div>
+			<div class="row d-flex justify-content-center mt-2">
+				<table> 
+					<tr>
+						<td>
+							<img id="computer-token" src="images/blank.png">
+						</td>
+						<td>
+							<video id="webcam" autoplay>Something went wrong!</video>
+						</td>
+					</tr>
+				</table>
+				</div>
+			</div>
+			<h3 id="mobile" hidden="true"> This website does not support playing the game on a mobile phone yet. </h3>
+		</div>
+	</div>
+	<div class="container mt-5">
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		
+		<div class="row d-flex justify-content-center">
+			<img src="images/blank.png" width="250">
+		</div>
+		<br>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	</div>
+
+	<canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
+	
+    <!--About modal-->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="globalModalLabel"> About </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> This is a cool website </p>
+                    <p> <a href="" target="_blank">See repository on GitHub</a></p>
+                    <p> Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="globalModalLabel"> Help </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                	<p> Help is coming soon! </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://chancejs.com/chance.min.js"></script>
+	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </div>
+</body>
+</html>

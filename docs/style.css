@@ -1,0 +1,42 @@
+body {
+  background-image: url("images/background.png");
+}
+
+#brand {
+  font-size: x-large;
+}
+
+video {
+  margin-top: 5px;
+  width: 620px;
+  height: 460px;
+
+  background-color: lightgray;
+  border-radius: 5px;
+}
+
+#computer-token {
+  width: 620px;
+  height: 460px;
+
+  border-radius: 5px;
+}
+
+#score-board {
+  padding: 10px;
+  width: 30%;
+
+  font-size: x-large;
+  background-color: white;
+  border-radius: 10px;
+}
+
+hr, p {
+  background-color: white;
+}
+
+#mobile {
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+}
