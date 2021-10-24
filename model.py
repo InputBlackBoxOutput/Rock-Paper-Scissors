@@ -41,15 +41,16 @@ def rps_predict(image, show=False):
   
 
 def test_webcam():
-  vid = cv2.VideoCapture(0)    
+  vid = cv2.VideoCapture(0)
+  font = cv2.FONT_HERSHEY_SIMPLEX
+
   while(True):
     ret, frame = vid.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     (pred, frame) = rps_predict(frame, show=True)
 
-    print(pred)
-
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+    cv2.putText(frame, str(pred), (50, 50), font, 1, (100, 100, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -72,6 +73,6 @@ def test_images():
     plt.show() 
 
 if __name__ == '__main__':
-  test_images()
-  # test_webcam()
+  # test_images()
+  test_webcam()
       
