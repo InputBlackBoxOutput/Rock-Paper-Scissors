@@ -1,6 +1,6 @@
 #  Rock 👊 Paper ✋ Scissors ✌
 
-## Dataset
+### Dataset
 1. Images were collected from the sources tabulated below
 
 |Source #|Link|
@@ -22,9 +22,8 @@ paper       2756
 scissors    2683
 ```
 
-## Model
-A Random Forest Classifier model was trained on the collected landmarks to classify hand pose into either paper, rock or scissors. The evalution metrics for the 
-classifier are shown below. Other classification models performed with about 2 per cent less accuracy than Random Forest Classifier. 
+### Model
+A Random Forest Classifier model was trained on the collected landmarks to classify hand pose into either paper, rock or scissors. The evaluation metrics for the classifier are shown below. Other classification models performed with about 2 per cent less accuracy than Random Forest Classifier. 
 
 ```text
 > Confusion Matrix

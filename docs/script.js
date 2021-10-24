@@ -17,6 +17,8 @@ const scorePlayer = document.querySelector("#score-player");
 
 
 ///////////////////////////////////////////////////////////////////////////
+// Check if device is a mobile device
+
 let width = 640;
 let height = 480;
 
@@ -36,6 +38,8 @@ if(screen.width < 500 ||
 }
 
 ///////////////////////////////////////////////////////////////////////////
+// Establish connection with the backend
+
 const backendURL = "https://rps-vision.herokuapp.com";
 // const backendURL = "http://127.0.0.1:5000";
 
@@ -53,6 +57,34 @@ function connectWithBackend() {
 }
 
 connectWithBackend();
+
+///////////////////////////////////////////////////////////////////////////
+// Preload some of the images
+
+function preload() {
+  let images = new Array();
+
+  for(let i=0; i<10; i++)
+    images[i] = new Image();
+
+  images[1].src = "images/outcomes/paper-paper.png";
+  images[2].src = "images/outcomes/paper-rock.png";
+  images[3].src = "images/outcomes/paper-scissors.png";
+
+  images[4].src = "images/outcomes/rock-paper.png";
+  images[5].src = "images/outcomes/rock-rock.png";
+  images[6].src = "images/outcomes/rock-scissors.png";
+
+  images[7].src = "images/outcomes/scissors-paper.png";
+  images[8].src = "images/outcomes/scissors-rock.png";
+  images[9].src = "images/outcomes/scissors-scissors.png";
+
+  images[0].src = "images/outcomes/none.png";
+
+  console.log("Preload");
+}
+
+preload();
 
 ///////////////////////////////////////////////////////////////////////////
 startButton.addEventListener("click", function() {
