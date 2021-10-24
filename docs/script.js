@@ -1,6 +1,7 @@
 const video = document.querySelector("#webcam");
 const startButton = document.querySelector("#start");
 const stopButton = document.querySelector("#stop");
+startButton.disabled = true;
 stopButton.disabled = true;
 
 const canvas = document.querySelector('#canvas');
@@ -15,6 +16,7 @@ let scoreP = 0;
 const scorePlayer = document.querySelector("#score-player");
 
 
+///////////////////////////////////////////////////////////////////////////
 let width = 640;
 let height = 480;
 
@@ -33,6 +35,24 @@ if(screen.width < 500 ||
 
 }
 
+///////////////////////////////////////////////////////////////////////////
+const backendURL = "https://rps-vision.herokuapp.com";
+// const backendURL = "http://127.0.0.1:5000";
+
+function connectWithBackend() {
+  computerToken.src = "images/connect.png";
+  axios.get(backendURL)
+        .then(response => {
+          computerToken.src = "images/blank.png";
+          startButton.disabled = false;
+        })
+        .catch(error => {
+            computerToken.src = "images/down.png";
+            console.log(error);
+        });
+}
+
+connectWithBackend();
 
 ///////////////////////////////////////////////////////////////////////////
 startButton.addEventListener("click", function() {
@@ -108,14 +128,11 @@ function game() {
       canvasContext.drawImage(video, 0, 0, width, height);
       let pngUrl = canvas.toDataURL(); 
 
-      const backendURL = "https://rps-vision.herokuapp.com/predict";
-      // const backendURL = "http://127.0.0.1:5000/predict";
-
-      axios.post(backendURL, {data: pngUrl})
+      axios.post(backendURL + "/predict", {data: pngUrl})
             .then(response => {
 
               pred = response.data.predict;
-              console.log(pred + "-" +token);
+              console.log(pred + "-" + token);
 
               if(pred == "['paper']") {
                 switch(token) {
@@ -123,7 +140,6 @@ function game() {
                   case 2: computerToken.src = "images/outcomes/rock-paper.png"; break;
                   case 3: computerToken.src = "images/outcomes/scissors-paper.png"; break;
                 }
-                console.log("P");
 
                 if(token == 2) scoreP += 1;
                 if(token == 3) scoreC += 1;
@@ -138,7 +154,6 @@ function game() {
                   case 2: computerToken.src = "images/outcomes/rock-rock.png"; break;
                   case 3: computerToken.src = "images/outcomes/scissors-rock.png"; break;
                 }
-                console.log("R");
 
                 if(token == 3) scoreP += 1;
                 if(token == 1) scoreC += 1;
@@ -152,7 +167,6 @@ function game() {
                   case 2: computerToken.src = "images/outcomes/rock-scissors.png"; break;
                   case 3: computerToken.src = "images/outcomes/scissors-scissors.png"; break;
                 }
-                console.log("S");
 
                 if(token == 1) scoreP += 1;
                 if(token == 2) scoreC += 1;
@@ -162,17 +176,17 @@ function game() {
               }
               else {
                 computerToken.src = "images/outcomes/none.png";
-                console.log("N");
               }
+
+              // Restart game after 5 seconds
+              setTimeout(function(){ game(); }, 5000);
               
             })
             .catch(error => {
+                clearInterval(timer);
                 computerToken.src = "images/down.png";
                 console.log(error);
             });
-
-            // Restart game after 5 seconds
-            setTimeout(function(){ game(); }, 5000);
 
     } else {
       computerToken.src = `images/${count}.png`;
