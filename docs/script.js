@@ -76,19 +76,27 @@ function successCallback(stream) {
 
   video.srcObject = stream;
 
-  // Stop video stream and timer 
   function stop() {
+  	// Stop video stream and timer 
     var stream = video.srcObject;
-    var tracks = stream.getTracks();
+    if(stream != null) {
+	    var tracks = stream.getTracks();
 
-    for (var i = 0; i < tracks.length; i++) {
-      var track = tracks[i];
-      track.stop();
-    }
+	    for (var i = 0; i < tracks.length; i++) {
+	      var track = tracks[i];
+	      track.stop();
+	    }
+	}
 
     video.srcObject = null;
     startButton.disabled = false;
     stopButton.disabled = true;
+
+    // Reset score board
+	scoreP = 0;
+	scoreC = 0;
+	scorePlayer.innerText = scoreP;
+	scoreComputer.innerText = scoreC;
   }
   stopButton.addEventListener("click", stop);
 
@@ -103,6 +111,7 @@ let errorCallback = function(e) {
 function game() {
   let count = 3;
   let timer = setInterval(function() { handleTimer(count); }, 1000);
+  const roundWait = 5000;
 
   function handleTimer() {
     if(video.srcObject == null) {
@@ -146,6 +155,7 @@ function game() {
                 
                 scorePlayer.innerText = scoreP;
                 scoreComputer.innerText = scoreC;
+                setTimeout(function(){ game(); }, roundWait);
               }
 
               else if(pred == "['rock']") {
@@ -160,6 +170,7 @@ function game() {
                 
                 scorePlayer.innerText = scoreP;
                 scoreComputer.innerText = scoreC;
+                setTimeout(function(){ game(); }, roundWait);
               }
               else if(pred == "['scissors']" && token == 3) {
                 switch(token) {
@@ -173,13 +184,12 @@ function game() {
                 
                 scorePlayer.innerText = scoreP;
                 scoreComputer.innerText = scoreC;
+                setTimeout(function(){ game(); }, roundWait);
               }
               else {
                 computerToken.src = "images/outcomes/none.png";
+                setTimeout(function(){ game(); }, roundWait);
               }
-
-              // Restart game after 5 seconds
-              setTimeout(function(){ game(); }, 5000);
               
             })
             .catch(error => {
