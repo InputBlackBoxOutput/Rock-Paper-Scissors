@@ -12,7 +12,6 @@
 	    <label id="brand" class="navbar-brand">Rock Paper Scissors </label>
 	    <div class="navbar-collapse">
 	        <ul class="navbar-nav ml-auto">
-	            <label class="btn rounded btn-secondary mr-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
 	            <label class="btn rounded btn-secondary mr-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
 	        </ul>
 	    </div>
@@ -45,24 +44,23 @@
 		</div>
 	</div>
 	<div class="container mt-5">
-		<hr>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		<div id="info" class="row px-5 py-3">
+
+		<h2> How it works? </h2>
+		<p>When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
+		</p>
 		
-		<div class="row d-flex justify-content-center">
-			<img src="images/blank.png" width="250">
+		<div class="col d-flex justify-content-center">
+			<img src="images/process.drawio.png">
 		</div>
-		<br>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<p>	The server predicts the token selected by the user by using the following steps:
+		</p>
+		<ol>
+			<li>The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks</li>
+			<li>The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user</li>
+		</ol>
+		</div>
 	</div>
 
 	<canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
@@ -79,30 +77,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p> This is a cool website </p>
-                    <p> <a href="" target="_blank">See repository on GitHub</a></p>
+                    <p> A website to play Rock Paper Scissors against a computer using the magic of computer vision </p>
+                    <p> <a href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors" target="_blank">See repository on GitHub</a></p>
                     <p> Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Help Modal -->
-    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="globalModalLabel"> Help </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                	<p> Help is coming soon! </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>

@@ -1,5 +1,15 @@
 #  Rock 👊 Paper ✋ Scissors ✌
 
+## How it works?
+When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
+
+The server predicts the token selected by the user by using the following steps:
+1. The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks
+1. The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user
+
+![](docs/images/process.drawio.png)
+
+## Building the classifier
 ### Dataset
 1. Images were collected from the sources tabulated below
 
@@ -12,7 +22,7 @@
 |5|https://www.kaggle.com/anirudhabhagwat/rock-paper-scissors-images|
 
 2. Images having more than 98% percent similarity were removed 
-3. Hand pose detection was performed on all the images and the landmarks were stored in CSV files
+3. Hand landmarks were obtained using the MediaPipe's hands solution and then stored in seperate CSV files as per source
 
 ```text
 > Class distribution
