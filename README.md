@@ -1,5 +1,7 @@
 #  Rock 👊 Paper ✋ Scissors ✌
 
+Play the game at https://inputblackboxoutput.github.io/Rock-Paper-Scissors
+
 ## How it works?
 When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
 
