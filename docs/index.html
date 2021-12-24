@@ -12,7 +12,8 @@
 	    <label id="brand" class="navbar-brand">Rock Paper Scissors </label>
 	    <div class="navbar-collapse">
 	        <ul class="navbar-nav ml-auto">
-	            <label class="btn rounded btn-secondary mr-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
+	            <label class="btn rounded btn-light mr-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
+	            <label class="btn rounded btn-light mr-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
 	        </ul>
 	    </div>
 	</nav>
@@ -40,10 +41,13 @@
 				</table>
 				</div>
 			</div>
-			<h3 id="mobile" hidden="true"> This website does not support playing the game on a mobile phone yet. </h3>
 		</div>
 	</div>
-	<div class="container mt-5">
+	<div class="container-fluid mt-4 py-2" id="mobile" hidden="true">
+		<h3> This website does not support playing the game on a mobile devices yet. </h3>
+	</div>
+			
+	<div class="container-fluid mt-4">
 		<div id="info" class="row px-5 py-3">
 
 		<h2> How it works? </h2>
@@ -62,9 +66,39 @@
 		</ol>
 		</div>
 	</div>
+	<div class="container-fluid mt-1">
+		<div id="copyright" class="d-flex justify-content-center">
+			Copyright © 2021 InputBlackBoxOutput
+		</div>
+	</div>
 
 	<canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
 	
+	<!--Help modal-->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="globalModalLabel"> How to play? </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+					<ol>
+						<li>Once you are connected to the server, press Start. You can stop the game at any time by using the Stop button</li>
+						<li>Make a choice and show your hand to your webcam. Wait until the 3-second timer runs out</li>
+						<li>The computer will show its choice and then compare it with your choice to find the winner</li>
+					</ol>
+                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
     <!--About modal-->
     <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
         aria-hidden="true">
@@ -77,13 +111,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p> A website to play Rock Paper Scissors against a computer using the magic of computer vision </p>
-                    <p> <a href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors" target="_blank">See repository on GitHub</a></p>
-                    <p> Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
+					<p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
+					<a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository on GitHub</a>
+					<p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+                <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+                </div> -->
             </div>
         </div>
     </div>

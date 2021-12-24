@@ -31,12 +31,13 @@ video {
   border-radius: 10px;
 }
 
-#info {
+.container-fluid {
   background-color: white;
 }
 
 #mobile {
-  color: white;
+  background-color: white;
+  /* color: white; */
   text-align: center;
   margin-top: 10px;
 }
