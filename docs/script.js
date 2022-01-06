@@ -183,7 +183,7 @@ function game() {
         .post(backendURL + "/predict", { data: pngUrl })
         .then((response) => {
           pred = response.data.predict;
-          console.log(pred + "-" + token);
+          // console.log(pred + "-" + token);
 
           if (pred == "['paper']") {
             switch (token) {

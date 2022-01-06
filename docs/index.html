@@ -4,10 +4,22 @@
 	<title>Rock Paper Scissors</title>
 	<link rel="stylesheet" type="text/css" href="style.css">	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="images/favicon/site.webmanifest">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	    <label id="brand" class="navbar-brand">Rock Paper Scissors </label>
+	<nav class="navbar navbar-expand-lg" id="navbar">
+		<a class="navbar-brand text-white" id="title">
+			<img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
+			Rock Paper Scissors
+		</a>
 	    <div class="navbar-collapse">
 	        <ul class="navbar-nav ml-auto">
 	            <label class="btn rounded btn-light mr-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
@@ -19,7 +31,7 @@
 	<div class="container">
 		<div class="col">
 			<div class="row d-flex justify-content-center mt-3">
-				<span id="score-board" class="text-center mr-2">
+				<span id="score-board" class="text-center mr-2 pt-2">
 					Computer: <label class="mr-3" id="score-computer">0</label>
 					Player: <label id="score-player">0</label>
 				</span>
@@ -49,7 +61,7 @@
 		<div id="info" class="row px-5 py-3">
 
 		<h2> How it works? </h2>
-		<p>When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
+		<p class="text-justify">When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
 		</p>
 		
 		<div class="col d-flex justify-content-center">
@@ -97,9 +109,9 @@
 						<li>The computer will show its choice and then compare it with your choice to find the winner</li>
 					</ol>
                 </div>
-                <!-- <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -120,9 +132,9 @@
 					<a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository on GitHub</a>
 					<p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
                 </div>
-                <!-- <div class="modal-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

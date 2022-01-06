@@ -1,5 +1,20 @@
-#brand {
-  font-size: x-large;
+body {
+  font-family: "Roboto", sans-serif !important;
+}
+
+#title {
+  font-size: 30px;
+}
+
+#logo {
+  border: black 1px solid;
+  border-radius: 10%;
+  width: 45px;
+  height: 45px;
+}
+
+#navbar {
+  background-color: rgb(36, 31, 40);
 }
 
 video {
@@ -19,10 +34,8 @@ video {
 }
 
 #score-board {
-  padding: 10px;
-  width: 30%;
-
-  font-size: x-large;
+  width: 25%;
+  font-size: 22px;
   background-color: white;
   border-radius: 10px;
 }
