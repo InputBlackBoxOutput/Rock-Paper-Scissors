@@ -97,8 +97,8 @@ preload();
 
 ///////////////////////////////////////////////////////////////////////////
 startButton.addEventListener("click", function () {
-  navigator.getUserMedia(
-    {
+  navigator.mediaDevices
+    .getUserMedia({
       audio: false,
       video: {
         mandatory: {
@@ -106,10 +106,13 @@ startButton.addEventListener("click", function () {
           maxHeight: height,
         },
       },
-    },
-    successCallback,
-    errorCallback
-  );
+    })
+    .then((stream) => {
+      successCallback(stream);
+    })
+    .catch((err) => {
+      errorCallback(err);
+    });
 });
 
 function successCallback(stream) {
