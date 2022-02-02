@@ -61,22 +61,28 @@
 	</div>
 			
 	<div class="container-fluid mt-4">
-		<div id="info" class="row px-5 py-3">
+		<div class="row px-2 py-3">
 
-		<h2> How it works? </h2>
-		<p class="text-justify">When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
-		</p>
-		
-		<div class="col d-flex justify-content-center">
-			<img src="images/process.drawio.png">
+		<div class="col">
+			<div class="row">
+				<h2> How it works? </h2>
+				<p class="text-justify">When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
+				</p>
+			</div>
+			
+			<div class="row d-flex justify-content-center">
+				<img class="img-fluid" src="images/process.drawio.png">
+			</div>
+
+			<div class="row">
+				<p>	The server predicts the token selected by the user by using the following steps:
+				</p>
+				<ol>
+					<li>The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks</li>
+					<li>The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user</li>
+				</ol>
+			</div>
 		</div>
-
-		<p>	The server predicts the token selected by the user by using the following steps:
-		</p>
-		<ol>
-			<li>The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks</li>
-			<li>The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user</li>
-		</ol>
 		</div>
 	</div>
 	<div class="container-fluid mt-1 pt-2">
