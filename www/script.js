@@ -230,7 +230,7 @@ function game() {
             setTimeout(function () {
               game();
             }, roundWait);
-          } else if (pred == "['scissors']" && token == 3) {
+          } else if (pred == "['scissors']") {
             switch (token) {
               case 1:
                 computerToken.src = "images/outcomes/paper-scissors.png";
