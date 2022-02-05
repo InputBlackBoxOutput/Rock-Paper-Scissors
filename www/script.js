@@ -1,12 +1,4 @@
-const video = document.querySelector("#webcam");
-const startButton = document.querySelector("#start");
-const stopButton = document.querySelector("#stop");
-startButton.disabled = true;
-stopButton.disabled = true;
-
-const canvas = document.querySelector("#canvas");
-const canvasContext = canvas.getContext("2d");
-
+// DOM linking
 let token = undefined;
 const computerToken = document.querySelector("#computer-token");
 
@@ -16,7 +8,17 @@ const scoreComputer = document.querySelector("#score-computer");
 let scoreP = 0;
 const scorePlayer = document.querySelector("#score-player");
 
-///////////////////////////////////////////////////////////////////////////
+const video = document.querySelector("#webcam");
+const startButton = document.querySelector("#start");
+const stopButton = document.querySelector("#stop");
+startButton.disabled = false;
+stopButton.disabled = true;
+
+const canvas = document.querySelector("#canvas");
+const canvasContext = canvas.getContext("2d");
+// canvas.hidden = false;
+
+// ///////////////////////////////////////////////////////////////////////////
 // Check if device is a mobile device
 
 let width = 640;
@@ -48,32 +50,10 @@ if (isMobileDevice()) {
   document.getElementById("mobile").hidden = false;
 }
 
-///////////////////////////////////////////////////////////////////////////
-// Establish connection with the backend
-
-const backendURL = "https://rps-vision.herokuapp.com";
-// const backendURL = "http://127.0.0.1:5000";
-
-function connectWithBackend() {
-  computerToken.src = "images/connect.png";
-  axios
-    .get(backendURL)
-    .then((response) => {
-      computerToken.src = "images/blank.png";
-      startButton.disabled = false;
-    })
-    .catch((error) => {
-      computerToken.src = "images/down.png";
-      console.log(error);
-    });
-}
-
-connectWithBackend();
-
-///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 // Preload some of the images
 
-function preload() {
+function preloadImages() {
   let images = new Array();
 
   for (let i = 0; i < 10; i++) images[i] = new Image();
@@ -93,81 +73,102 @@ function preload() {
   images[0].src = "images/outcomes/none.png";
 }
 
-preload();
+preloadImages();
 
-///////////////////////////////////////////////////////////////////////////
-startButton.addEventListener("click", function () {
-  navigator.mediaDevices
-    .getUserMedia({
-      audio: false,
-      video: {
-        mandatory: {
-          maxWidth: width,
-          maxHeight: height,
-        },
-      },
+//////////////////////////////////////////////////////////////////////////
+// Setup camera
+const camera = new Camera(video, {
+  onFrame: async () => {
+    await hands.send({ image: video });
+  },
+  width: 640,
+  height: 480,
+});
+
+//////////////////////////////////////////////////////////////////////////
+// Setup game control buttons
+startButton.addEventListener("click", () => {
+  startButton.disabled = true;
+  stopButton.disabled = false;
+  access = camera.start();
+
+  access
+    .then((e) => {
+      computerToken.src = "images/setup.png";
+      setTimeout(function () {
+        game();
+      }, 7000);
     })
-    .then((stream) => {
-      successCallback(stream);
-    })
-    .catch((err) => {
-      errorCallback(err);
+    .catch((e) => {
+      alert("Camera access is required to play the game");
     });
 });
 
-function successCallback(stream) {
-  // Display the stream
-  startButton.disabled = true;
-  stopButton.disabled = false;
+stopButton.addEventListener("click", () => {
+  location.reload();
+});
 
-  video.srcObject = stream;
+//////////////////////////////////////////////////////////////////////////
+// Setup hand pose estimation
+let landmarks = undefined;
 
-  function stop() {
-    // Stop video stream and timer
-    var stream = video.srcObject;
-    if (stream != null) {
-      var tracks = stream.getTracks();
+function onResultsHands(results) {
+  //   canvasContext.save();
+  //   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+  //   canvasContext.drawImage(results.image, 0, 0, canvas.width, canvas.height);
 
-      for (var i = 0; i < tracks.length; i++) {
-        var track = tracks[i];
-        track.stop();
-      }
+  landmarks = undefined;
+  if (results.multiHandLandmarks && results.multiHandedness) {
+    for (let index = 0; index < results.multiHandLandmarks.length; index++) {
+      landmarks = results.multiHandLandmarks[index];
+
+      //   const classification = results.multiHandedness[index];
+      //   const isRightHand = classification.label === "Right";
+
+      //   drawConnectors(canvasContext, landmarks, HAND_CONNECTIONS, {
+      //     color: isRightHand ? "#00FF00" : "#FF0000",
+      //   }),
+      //     drawLandmarks(canvasContext, landmarks, {
+      //       color: isRightHand ? "#00FF00" : "#FF0000",
+      //       fillColor: isRightHand ? "#FF0000" : "#00FF00",
+      //       radius: (x) => {
+      //         return lerp(x.from.z, -0.15, 0.1, 10, 1);
+      //       },
+      //     });
     }
-
-    video.srcObject = null;
-    startButton.disabled = false;
-    stopButton.disabled = true;
-
-    // Reset score board
-    scoreP = 0;
-    scoreC = 0;
-    scorePlayer.innerText = scoreP;
-    scoreComputer.innerText = scoreC;
   }
-  stopButton.addEventListener("click", stop);
-
-  game();
+  canvasContext.restore();
 }
 
-let errorCallback = function (e) {
-  console.log("Something went wrong while acessing webcam");
-};
+const hands = new Hands({
+  locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/${file}`;
+  },
+});
+hands.onResults(onResultsHands);
 
-///////////////////////////////////////////////////////////////////////////
+// Controls
+new ControlPanel(document.createElement("div"), {
+  selfieMode: true,
+  maxNumHands: 1,
+  minDetectionConfidence: 0.75,
+  minTrackingConfidence: 0.75,
+}).on((options) => {
+  video.classList.toggle("selfie", options.selfieMode);
+  // console.log(options);
+  hands.setOptions(options);
+});
+
+//////////////////////////////////////////////////////////////////////////
+
 function game() {
   let count = 3;
   let timer = setInterval(function () {
     handleTimer(count);
   }, 1000);
-  const roundWait = 5000;
+  const roundWait = 3000;
 
   function handleTimer() {
-    if (video.srcObject == null) {
-      clearInterval(timer);
-      computerToken.src = "images/blank.png";
-      return;
-    }
-
     if (count === 0) {
       clearInterval(timer);
 
@@ -179,94 +180,78 @@ function game() {
       else computerToken.src = "images/scissors.png";
 
       // Get prediction
-      canvasContext.drawImage(video, 0, 0, width, height);
-      let pngUrl = canvas.toDataURL();
+      if (landmarks != undefined) {
+        pred = randomForestClassifier(landmarks);
+        console.log(pred);
 
-      axios
-        .post(backendURL + "/predict", { data: pngUrl })
-        .then((response) => {
-          pred = response.data.predict;
-          // console.log(pred + "-" + token);
-
-          if (pred == "['paper']") {
-            switch (token) {
-              case 1:
-                computerToken.src = "images/outcomes/paper-paper.png";
-                break;
-              case 2:
-                computerToken.src = "images/outcomes/rock-paper.png";
-                break;
-              case 3:
-                computerToken.src = "images/outcomes/scissors-paper.png";
-                break;
-            }
-
-            if (token == 2) scoreP += 1;
-            if (token == 3) scoreC += 1;
-
-            scorePlayer.innerText = scoreP;
-            scoreComputer.innerText = scoreC;
-            setTimeout(function () {
-              game();
-            }, roundWait);
-          } else if (pred == "['rock']") {
-            switch (token) {
-              case 1:
-                computerToken.src = "images/outcomes/paper-rock.png";
-                break;
-              case 2:
-                computerToken.src = "images/outcomes/rock-rock.png";
-                break;
-              case 3:
-                computerToken.src = "images/outcomes/scissors-rock.png";
-                break;
-            }
-
-            if (token == 3) scoreP += 1;
-            if (token == 1) scoreC += 1;
-
-            scorePlayer.innerText = scoreP;
-            scoreComputer.innerText = scoreC;
-            setTimeout(function () {
-              game();
-            }, roundWait);
-          } else if (pred == "['scissors']") {
-            switch (token) {
-              case 1:
-                computerToken.src = "images/outcomes/paper-scissors.png";
-                break;
-              case 2:
-                computerToken.src = "images/outcomes/rock-scissors.png";
-                break;
-              case 3:
-                computerToken.src = "images/outcomes/scissors-scissors.png";
-                break;
-            }
-
-            if (token == 1) scoreP += 1;
-            if (token == 2) scoreC += 1;
-
-            scorePlayer.innerText = scoreP;
-            scoreComputer.innerText = scoreC;
-            setTimeout(function () {
-              game();
-            }, roundWait);
-          } else {
-            computerToken.src = "images/outcomes/none.png";
-            setTimeout(function () {
-              game();
-            }, roundWait);
+        if (pred === "P") {
+          switch (token) {
+            case 1:
+              computerToken.src = "images/outcomes/paper-paper.png";
+              break;
+            case 2:
+              computerToken.src = "images/outcomes/rock-paper.png";
+              break;
+            case 3:
+              computerToken.src = "images/outcomes/scissors-paper.png";
+              break;
           }
-        })
-        .catch((error) => {
-          clearInterval(timer);
-          computerToken.src = "images/down.png";
-          console.log(error);
-        });
+
+          if (token == 2) scoreP += 1;
+          if (token == 3) scoreC += 1;
+
+          scorePlayer.innerText = scoreP;
+          scoreComputer.innerText = scoreC;
+        } else if (pred === "R") {
+          switch (token) {
+            case 1:
+              computerToken.src = "images/outcomes/paper-rock.png";
+              break;
+            case 2:
+              computerToken.src = "images/outcomes/rock-rock.png";
+              break;
+            case 3:
+              computerToken.src = "images/outcomes/scissors-rock.png";
+              break;
+          }
+
+          if (token == 3) scoreP += 1;
+          if (token == 1) scoreC += 1;
+
+          scorePlayer.innerText = scoreP;
+          scoreComputer.innerText = scoreC;
+        } else if (pred == "S") {
+          switch (token) {
+            case 1:
+              computerToken.src = "images/outcomes/paper-scissors.png";
+              break;
+            case 2:
+              computerToken.src = "images/outcomes/rock-scissors.png";
+              break;
+            case 3:
+              computerToken.src = "images/outcomes/scissors-scissors.png";
+              break;
+          }
+
+          if (token == 1) scoreP += 1;
+          if (token == 2) scoreC += 1;
+
+          scorePlayer.innerText = scoreP;
+          scoreComputer.innerText = scoreC;
+        }
+      } else {
+        clearInterval(timer);
+        computerToken.src = "images/outcomes/none.png";
+      }
+
+      // Restart counter
+      setTimeout(function () {
+        game();
+      }, roundWait);
     } else {
       computerToken.src = `images/${count}.png`;
       count--;
     }
   }
 }
-///////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////

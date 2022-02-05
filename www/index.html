@@ -1,106 +1,118 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Rock Paper Scissors</title>
-	<meta charset="UTF-8">
+    <title>Rock Paper Scissors</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" type="text/css" href="style.css">	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	
-	<link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="images/favicon/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="style.css">    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="images/favicon/site.webmanifest">
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg" id="navbar">
-		<a class="navbar-brand text-white" id="title">
-			<img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
-			Rock Paper Scissors
-		</a>
-	    <div class="navbar-collapse">
-	        <ul class="navbar-nav ml-auto">
-	            <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
-	            <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
-	        </ul>
-	    </div>
-	</nav>
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <a class="navbar-brand text-white" id="title">
+            <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
+            Rock Paper Scissors
+        </a>
+        <div class="navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
+            </ul>
+        </div>
+    </nav>
 
-	<div class="container">
-		<div class="col">
-			<div class="row d-flex justify-content-center mt-3">
-				<span id="score-board" class="text-center mr-2 pt-2">
-					Computer: <label class="mr-3" id="score-computer">0</label>
-					Player: <label id="score-player">0</label>
-				</span>
-				<button id='start' class="btn btn-lg btn-success mr-2">  Start </button>
-				<button id='stop' class="btn btn-lg btn-danger mr-2"> Stop </button>
-			</div>
-			<div class="row d-flex justify-content-center mt-2">
-				<table> 
-					<tr>
-						<td>
-							<img id="computer-token" src="images/blank.png">
-						</td>
-						<td>
-							<video id="webcam" autoplay>Something went wrong!</video>
-						</td>
-					</tr>
-				</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container-fluid mt-4 py-2" id="mobile" hidden="true">
-		<h3> Sorry, this webapp does not support playing the game on mobile devices yet. </h3>
-	</div>
-			
-	<div class="container-fluid mt-4">
-		<div class="row px-2 py-3">
+    <div class="container">
+        <div class="col">
+            <div class="row d-flex justify-content-center mt-3">
+                <span id="score-board" class="text-center mr-2 pt-2">
+                    Computer: <label class="mr-3" id="score-computer">0</label>
+                    Player: <label id="score-player">0</label>
+                </span>
+                <button id='start' class="btn btn-lg btn-success mr-2">  Start </button>
+                <button id='stop' class="btn btn-lg btn-danger mr-2"> Stop </button>
+            </div>
+            <div class="row d-flex justify-content-center mt-2">
+                <table> 
+                    <tr>
+                        <td>
+                            <img id="computer-token" src="images/blank.png">
+                        </td>
+                        <td>
+                            <video id="webcam" autoplay>Something went wrong!</video>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-2 py-2" id="mobile" hidden="true">
+        <h4> This web application does not support playing the game on mobile devices yet. </h4>
+    </div>
+            
+    <div class="container-fluid mt-4">
+        <div class="row px-2 py-3">
 
-		<div class="col">
-			<div class="row">
-				<h2> How it works? </h2>
-				<p class="text-justify">When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
-				</p>
-			</div>
-			
+        <div class="col">
+            <div class="row">
+                <h2> How it works? </h2>
+                <p class="text-justify">When the page loads, a connection to the server running the computer vision model is established. The game requests access to your web camera when you press the play button and sends a snapshot to the server every time the 3 second timer runs out. At the server, the model will try its best to predict what token you showed and then send the outcome back to the webpage. The results are compared with the choice which the computer simultaneously made with you and the score board is updated accordingly
+                </p>
+            </div>
+            <br>
+            <div class="row d-flex justify-content-center">
+                <img class="img-fluid" src="images/process.drawio.png">
+            </div>
+			<br>
+            <div class="row">
+                <p>    The server predicts the token selected by the user by using the following steps:
+                </p>
+                <ol>
+                    <li>The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks</li>
+                    <li>The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user</li>
+                </ol>
+            </div>
 			<div class="row d-flex justify-content-center">
-				<img class="img-fluid" src="images/process.drawio.png">
+				<canvas id="canvas" width="640" height="480" hidden="true"></canvas>
 			</div>
-
-			<div class="row">
-				<p>	The server predicts the token selected by the user by using the following steps:
-				</p>
-				<ol>
-					<li>The image is passed to MediaPipe hands solution after the image is decoded from Base64 to obtain the hand landmarks</li>
-					<li>The hand landmarks are passed to a machine learning based classifier which predicts the token chosen by the user</li>
-				</ol>
-			</div>
-		</div>
-		</div>
-	</div>
-	<div class="container-fluid mt-1 pt-2">
-		<div id="copyright">
-			<div class="row">
-				<div class="col-md-6">
-					<h6> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a href="privacy-policy.html"> Privacy Policy </a> </h6>
-				</div>
-				<div class="col-md-6">
-					<h6 class="text-right">Copyright © 2021 InputBlackBoxOutput</h6>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-	
-	<!--Help modal-->
+        </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-1 pt-2 pb-1">
+        <div class="row">
+            <div id="footer-1" class="col-md-6 p-1">
+                <h6 class="m-0"> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a href="privacy-policy.html"> Privacy Policy </a> </h6>
+            </div>
+            <div id="footer-2" class="col-md-6 p-1">
+                <h6 class="text-right m-0">Copyright © 2021 InputBlackBoxOutput</h6>
+            </div>
+            <hr>
+            <script>
+                if (
+                    screen.width < 500 ||
+                    navigator.userAgent.match(/Android/i) ||
+                    navigator.userAgent.match(/webOS/i) ||
+                    navigator.userAgent.match(/iPhone/i) ||
+                    navigator.userAgent.match(/iPod/i)
+                ) {
+                    document.getElementById("footer-1").innerHTML = '<h6 class="text-center"> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a href="privacy-policy.html"> Privacy Policy </a> </h6>';
+                    document.getElementById("footer-2").innerHTML = '<h6 class="text-center">Copyright © 2021 InputBlackBoxOutput</h6>';
+                }
+            </script>
+        </div>
+    </div>
+    
+    <!--Help modal-->
     <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -112,11 +124,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-					<ol>
-						<li>Once you are connected to the server, press Start. You can stop the game at any time by using the Stop button</li>
-						<li>Make a choice and show your hand to your webcam. Wait until the 3-second timer runs out</li>
-						<li>The computer will show its choice and then compare it with your choice to find the winner</li>
-					</ol>
+                    <ol>
+                        <li>Once you are connected to the server, press Start. You can stop the game at any time by using the Stop button</li>
+                        <li>Make a choice and show your hand to your webcam. Wait until the 3-second timer runs out</li>
+                        <li>The computer will show its choice and then compare it with your choice to find the winner</li>
+                    </ol>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
@@ -137,9 +149,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-					<p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
-					<a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository on GitHub</a>
-					<p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
+                    <p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
+                    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository on GitHub</a>
+                    <p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
@@ -147,13 +159,18 @@
             </div>
         </div>
     </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/hands.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://chancejs.com/chance.min.js"></script>
-	<script type="text/javascript" src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="rfc.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </div>
 </body>
