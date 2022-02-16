@@ -57,30 +57,29 @@
         </div>
     </div>
     <div class="container-fluid mt-2 py-2" id="mobile" hidden="true">
-        <h4> This web application does not support playing the game on mobile devices yet. </h4>
+        <h4> Sorry, Rock Paper Scissors does not support mobile devices </h4>
     </div>
             
     <div class="container-fluid mt-4">
         <div class="row px-2 py-3">
-
-        <div class="col">
-            <div class="row">
-                <h2> How it works? </h2>
-                <p class="text-justify">
-                    Once the page is loaded, the game requests access to your web camera when you press the play button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to obtain hand landmarks. 
-                    When the 3-second timer runs out, the model will use the obtained hand landmarks and try its best to predict your token. The predicted token is compared with the choice simultaneously made by the computer, and the 
-                    scoreboard is updated accordingly
-                </p>
+            <div class="col">
+                <div class="row">
+                    <h2> How it works? </h2>
+                    <p class="text-justify">
+                        Once the page is loaded, the game requests access to your web camera when you press the play button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to obtain hand landmarks. 
+                        When the 3-second timer runs out, a Random Forest Classifier will use the obtained hand landmarks and try its best to predict your token. The predicted token is compared with the choice simultaneously made by the computer, and the 
+                        scoreboard is updated accordingly
+                    </p>
+                </div>
+                <br>
+                <div class="row d-flex justify-content-center">
+                    <img class="img-fluid" src="images/process.drawio.png">
+                </div>
+                <br>
+                <div class="row d-flex justify-content-center">
+                    <canvas id="canvas" width="640" height="480" hidden="true"></canvas>
+                </div>
             </div>
-            <br>
-            <div class="row d-flex justify-content-center">
-                <img class="img-fluid" src="images/process.drawio.png">
-            </div>
-			<br>
-			<div class="row d-flex justify-content-center">
-				<canvas id="canvas" width="640" height="480" hidden="true"></canvas>
-			</div>
-        </div>
         </div>
     </div>
     <div class="container-fluid mt-1 pt-2 pb-1">
