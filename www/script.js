@@ -18,38 +18,6 @@ const canvas = document.querySelector("#canvas");
 const canvasContext = canvas.getContext("2d");
 // canvas.hidden = false;
 
-// ///////////////////////////////////////////////////////////////////////////
-// Check if device is a mobile device
-
-let width = 640;
-let height = 480;
-
-function isMobileDevice() {
-  if (
-    screen.width < 500 ||
-    navigator.userAgent.match(/Android/i) ||
-    navigator.userAgent.match(/webOS/i) ||
-    navigator.userAgent.match(/iPhone/i) ||
-    navigator.userAgent.match(/iPod/i)
-  ) {
-    return true;
-  }
-  return false;
-}
-
-if (isMobileDevice()) {
-  computerToken.hidden = true;
-  video.hidden = true;
-
-  startButton.hidden = true;
-  startButton.disabled = true;
-  stopButton.hidden = true;
-  stopButton.disabled = true;
-  scoreBoard.hidden = true;
-
-  document.getElementById("mobile").hidden = false;
-}
-
 //////////////////////////////////////////////////////////////////////////
 // Preload some of the images
 
