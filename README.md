@@ -25,12 +25,15 @@ Once the page is loaded, the game requests access to your web camera when you pr
 2. Images having more than 98% percent similarity were removed
 3. Hand landmarks were obtained using the MediaPipe's hands solution and then stored in seperate CSV files as per source
 
-```text
-> Class distribution
-rock        3611
-scissors    3250
-paper       3102
-```
+#### Dataset composition
+- Images
+
+![image](https://user-images.githubusercontent.com/53337979/159963477-2b1b8d7d-19ac-4238-a5fc-32704a03d633.png)
+
+- Hand Landmarks
+
+![image](https://user-images.githubusercontent.com/53337979/159963498-621554fb-0fb2-45fd-ab99-2bb0fca0d775.png)
+
 
 ### Model
 
