@@ -68,6 +68,8 @@ startButton.addEventListener("click", () => {
       }, 7000);
     })
     .catch((e) => {
+      startButton.disabled = false;
+      stopButton.disabled = true;
       alert("Camera access is required to play the game");
     });
 });
