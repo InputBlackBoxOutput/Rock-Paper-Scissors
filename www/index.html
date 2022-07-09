@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Rock Paper Scissors</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="style.css">    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="images/favicon/site.webmanifest">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖥️</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <script>
         // Check if device is a mobile device
@@ -39,8 +40,10 @@
         </a>
         <div class="navbar-collapse">
             <ul class="navbar-nav ml-auto">
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help </label>
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About </label>
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help
+                </label>
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About
+                </label>
             </ul>
         </div>
     </nav>
@@ -48,15 +51,19 @@
     <div class="container">
         <div class="col">
             <div class="row d-flex justify-content-center mt-3">
-                <span id="score-board" class="text-center mr-2 pt-2">
+                <span id="score-board" class="text-center mr-2 pt-2 px-2">
                     Computer: <label class="mr-3" id="score-computer">0</label>
                     Player: <label id="score-player">0</label>
                 </span>
-                <button id='start' class="btn btn-lg btn-success mr-2">  Start </button>
-                <button id='stop' class="btn btn-lg btn-danger mr-2"> Stop </button>
+                <div class="control-btn-div mr-2">
+                    <button id='start' class="btn btn-lg btn-success"> Start </button>
+                </div>
+                <div class="control-btn-div">
+                    <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
+                </div>
             </div>
             <div class="row d-flex justify-content-center mt-2">
-                <table> 
+                <table>
                     <tr>
                         <td>
                             <img id="computer-token" src="images/blank.png">
@@ -66,19 +73,23 @@
                         </td>
                     </tr>
                 </table>
-                </div>
             </div>
         </div>
     </div>
-                
+    </div>
+
     <div class="container-fluid mt-4">
         <div class="row px-2 py-3">
             <div class="col">
                 <div class="row">
                     <h2> How it works? </h2>
                     <p class="text-justify">
-                        Once the page is loaded, the game requests access to your web camera when you press the play button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to obtain hand landmarks. 
-                        When the 3-second timer runs out, a Random Forest Classifier will use the obtained hand landmarks and try its best to predict your token. The predicted token is compared with the choice simultaneously made by the computer, and the 
+                        Once the page is loaded, the game requests access to your web camera when you press the play
+                        button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to
+                        obtain hand landmarks.
+                        When the 3-second timer runs out, a Random Forest Classifier will use the obtained hand
+                        landmarks and try its best to predict your token. The predicted token is compared with the
+                        choice simultaneously made by the computer, and the
                         scoreboard is updated accordingly
                     </p>
                 </div>
@@ -96,7 +107,8 @@
     <div class="container-fluid mt-1 pt-2 pb-1">
         <div class="row">
             <div id="footer-1" class="col-md-6 p-1">
-                <h6 class="m-0"> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a href="privacy-policy.html"> Privacy Policy </a> </h6>
+                <h6 class="m-0"> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a
+                        href="privacy-policy.html"> Privacy Policy </a> </h6>
             </div>
             <div id="footer-2" class="col-md-6 p-1">
                 <h6 class="text-right m-0">Copyright © 2021 InputBlackBoxOutput</h6>
@@ -116,7 +128,7 @@
             </script>
         </div>
     </div>
-    
+
     <!--Help modal-->
     <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
         aria-hidden="true">
@@ -131,8 +143,10 @@
                 <div class="modal-body">
                     <ol>
                         <li>Press the Start button and wait until the game setup is complete.</li>
-                        <li>When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out</li>
-                        <li>The computer will show its choice and then compare it with your choice to find the winner</li>
+                        <li>When the 3-second timer starts, make a choice and show your hand to your webcam before the
+                            timer runs out</li>
+                        <li>The computer will show its choice and then compare it with your choice to find the winner
+                        </li>
                         <li>If you want to stop the game press the Stop button</li>
                     </ol>
                 </div>
@@ -156,7 +170,8 @@
                 </div>
                 <div class="modal-body">
                     <p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
-                    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository on GitHub</a>
+                    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository
+                        on GitHub</a>
                     <p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
                 </div>
                 <div class="modal-footer">
@@ -165,19 +180,29 @@
             </div>
         </div>
     </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/hands.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://chancejs.com/chance.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
     <script type="text/javascript" src="rfc.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    </div>
 </body>
+
 </html>

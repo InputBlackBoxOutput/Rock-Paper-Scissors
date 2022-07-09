@@ -21,6 +21,10 @@ body {
   background-color: rgb(36, 31, 40);
 }
 
+.control-btn-div {
+  background-color: rgb(21, 16, 25);
+}
+
 video {
   margin-top: 7px;
   width: 620px;
@@ -38,7 +42,6 @@ video {
 }
 
 #score-board {
-  width: 25%;
   font-size: 22px;
   background-color: white;
   border-radius: 10px;
