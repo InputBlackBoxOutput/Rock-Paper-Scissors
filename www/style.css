@@ -1,5 +1,6 @@
 body {
   font-family: "Roboto", sans-serif !important;
+  background-image: url("images/background-compressed.png");
 }
 
 .container-fluid {
@@ -47,13 +48,13 @@ video {
   border-radius: 10px;
 }
 
+#footer-1>label>a {
+  color: #006ee5;
+}
+
 #mobile {
   background-color: white;
   /* color: white; */
   text-align: center;
   margin-top: 10px;
-}
-
-body {
-  background-image: url("images/background-compressed.png");
 }

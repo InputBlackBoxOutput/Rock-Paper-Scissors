@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Rock Paper Scissors</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description="Play Rock Paper Scissors with a computer using the magic of computer vision">
 
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -34,17 +35,17 @@
     </script>
 
     <nav class="navbar navbar-expand-lg" id="navbar">
-        <a class="navbar-brand text-white" id="title">
+        <a class="navbar-brand text-white" id="title" href="https://rock-paper-scissor-cv.netlify.app/">
             <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
             Rock Paper Scissors
         </a>
         <div class="navbar-collapse">
-            <ul class="navbar-nav ml-auto">
+            <div class="navbar-nav ml-auto">
                 <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help
                 </label>
                 <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About
                 </label>
-            </ul>
+            </div>
         </div>
     </nav>
 
@@ -66,7 +67,7 @@
                 <table>
                     <tr>
                         <td>
-                            <img id="computer-token" src="images/blank.png">
+                            <img id="computer-token" src="images/blank.png" alt="Computer token">
                         </td>
                         <td>
                             <video id="webcam" autoplay>Something went wrong!</video>
@@ -95,7 +96,7 @@
                 </div>
                 <br>
                 <div class="row d-flex justify-content-center">
-                    <img class="img-fluid" src="images/process.drawio.png">
+                    <img class="img-fluid" src="images/process.drawio.png" alt="Process flow">
                 </div>
                 <br>
                 <div class="row d-flex justify-content-center">
@@ -107,11 +108,13 @@
     <div class="container-fluid mt-1 pt-2 pb-1">
         <div class="row">
             <div id="footer-1" class="col-md-6 p-1">
-                <h6 class="m-0"> <a href="terms-and-conditions.html">Terms & Conditions</a> | <a
-                        href="privacy-policy.html"> Privacy Policy </a> </h6>
+                <label class="h6 m-0">
+                    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+                    <a href="privacy-policy.html"> Privacy Policy </a>
+                </label>
             </div>
             <div id="footer-2" class="col-md-6 p-1">
-                <h6 class="text-right m-0">Copyright © 2021 InputBlackBoxOutput</h6>
+                <label class="h6 text-right m-0">Copyright © 2021 InputBlackBoxOutput</label>
             </div>
             <hr>
             <script>
@@ -130,12 +133,11 @@
     </div>
 
     <!--Help modal-->
-    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="modal-help" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="globalModalLabel"> How to play? </h5>
+                    <h5 class="modal-title" id="modal-help"> How to play? </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -158,12 +160,12 @@
     </div>
 
     <!--About modal-->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="globalModalLabel"
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="modal-about"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="globalModalLabel"> About </h5>
+                    <h5 class="modal-title" id="modal-about"> About </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
