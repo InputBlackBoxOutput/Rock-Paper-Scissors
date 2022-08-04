@@ -39,12 +39,17 @@
             <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
             Rock Paper Scissors
         </a>
-        <div class="navbar-collapse">
+
+        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+            data-target="#navbar-collapse-button" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse-button">
             <div class="navbar-nav ml-auto">
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#helpModal"> Help
-                </label>
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" data-toggle="modal" data-target="#aboutModal"> About
-                </label>
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="help-button"> Help </label>
+                <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="about-button"> About </label>
             </div>
         </div>
     </nav>
@@ -119,52 +124,23 @@
         </div>
     </div>
 
-    <!--Help modal-->
-    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="modal-help" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal-help"> How to play? </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <ol>
-                        <li>Press the Start button and wait until the game setup is complete.</li>
-                        <li>When the 3-second timer starts, make a choice and show your hand to your webcam before the
-                            timer runs out</li>
-                        <li>The computer will show its choice and then compare it with your choice to find the winner
-                        </li>
-                        <li>If you want to stop the game press the Stop button</li>
-                    </ol>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!--Generic modal-->
+    <button id="show-modal" hidden="true" data-toggle="modal" data-target="#generic-modal"></button>
 
-    <!--About modal-->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="modal-about"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="generic-modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal-about"> About </h5>
+                    <h3 class="modal-title">Modal title</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
-                    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository
-                        on GitHub</a>
-                    <p>Created by Rutuparn Pawar (InputBlackBoxOutput)</p>
+                    Modal content
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-block btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

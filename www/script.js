@@ -18,6 +18,9 @@ const canvas = document.querySelector("#canvas");
 const canvasContext = canvas.getContext("2d");
 // canvas.hidden = false;
 
+const helpButton = document.getElementById("help-button");
+const aboutButton = document.getElementById("about-button");
+
 //////////////////////////////////////////////////////////////////////////
 // Preload some of the images
 
@@ -42,6 +45,38 @@ function preloadImages() {
 }
 
 preloadImages();
+
+//////////////////////////////////////////////////////////////////////////
+// Generic modal
+
+function displayMessageViaModal(messageTitle, messageContent) {
+  document.getElementsByClassName('modal-title')[0].innerHTML = messageTitle;
+  document.getElementsByClassName('modal-body')[0].innerHTML = messageContent;
+  document.getElementById('show-modal').click();
+}
+
+aboutButton.addEventListener('click', () => {
+  displayMessageViaModal("About", `
+   <p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
+    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository
+        on GitHub</a>
+    <p>Created by Rutuparn Pawar [InputBlackBoxOutput]</p>
+  `);
+})
+
+helpButton.addEventListener('click', () => {
+  displayMessageViaModal("How to play?", `
+    <ol>
+        <li>Press the Start button and wait until the game setup is complete.</li>
+        <li>When the 3-second timer starts, make a choice and show your hand to your webcam before the
+            timer runs out</li>
+        <li>The computer will show its choice and then compare it with your choice to find the winner
+        </li>
+        <li>If you want to stop the game press the Stop button</li>
+    </ol>
+  `);
+})
+
 
 //////////////////////////////////////////////////////////////////////////
 // Setup camera
@@ -70,7 +105,8 @@ startButton.addEventListener("click", () => {
     .catch((e) => {
       startButton.disabled = false;
       stopButton.disabled = true;
-      alert("Camera access is required to play the game");
+
+      displayMessageViaModal("Permission required!", "Camera access is required to play the game. Please reload the page, press the start button and allow camera access");
     });
 });
 
