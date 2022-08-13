@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta description="Play Rock Paper Scissors with a computer using the magic of computer vision">
 
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="styles/styles.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -23,13 +23,11 @@
     <script>
         // Check if device is a mobile device
         if (
-            screen.width < 500 ||
             navigator.userAgent.match(/Android/i) ||
             navigator.userAgent.match(/webOS/i) ||
             navigator.userAgent.match(/iPhone/i) ||
             navigator.userAgent.match(/iPod/i)
         ) {
-            console.log("Mobile device!");
             location.replace("mobile.html");
         }
     </script>
@@ -114,8 +112,8 @@
         <div class="row">
             <div id="footer-1" class="col-md-6 p-1">
                 <label class="h6 m-0">
-                    <a href="terms-and-conditions.html">Terms & Conditions</a> |
-                    <a href="privacy-policy.html"> Privacy Policy </a>
+                    <a href="legal/terms-and-conditions.html">Terms & Conditions</a> |
+                    <a href="legal/privacy-policy.html"> Privacy Policy </a>
                 </label>
             </div>
             <div id="footer-2" class="col-md-6 p-1 text-right">
@@ -155,8 +153,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/hands.js" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://chancejs.com/chance.min.js"></script>
-    <script type="text/javascript" src="script.js"></script>
-    <script type="text/javascript" src="rfc.js"></script>
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <script type="text/javascript" src="scripts/rfc.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
