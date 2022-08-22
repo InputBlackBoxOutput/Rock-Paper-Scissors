@@ -16,7 +16,6 @@ stopButton.disabled = true;
 
 const canvas = document.querySelector("#canvas");
 const canvasContext = canvas.getContext("2d");
-// canvas.hidden = false;
 
 const helpButton = document.getElementById("help-button");
 const aboutButton = document.getElementById("about-button");
@@ -90,9 +89,10 @@ const camera = new Camera(video, {
 
 //////////////////////////////////////////////////////////////////////////
 // Setup game control buttons
-startButton.addEventListener("click", () => {
-  startButton.disabled = true;
-  stopButton.disabled = false;
+let numClicks = 0;
+let displayHandLandmarks = false;
+
+function start() {
   access = camera.start();
 
   access
@@ -108,7 +108,32 @@ startButton.addEventListener("click", () => {
 
       displayMessageViaModal("Permission required!", "Camera access is required to play the game. Please reload the page, press the start button and allow camera access");
     });
-});
+
+  startButton.disabled = true;
+  stopButton.disabled = false;
+
+  handNotDetectedCount = 0;
+}
+
+function handleClick() {
+  numClicks++;
+  if (numClicks === 1) {
+    singleClickTimer = setTimeout(() => {
+      numClicks = 0;
+
+      displayHandLandmarks = false;
+      start();
+
+    }, 400);
+  } else if (numClicks === 2) {
+    clearTimeout(singleClickTimer);
+    numClicks = 0;
+
+    displayHandLandmarks = true;
+    start();
+  }
+};
+startButton.addEventListener("click", handleClick);
 
 stopButton.addEventListener("click", () => {
   location.reload();
@@ -119,28 +144,30 @@ stopButton.addEventListener("click", () => {
 let landmarks = undefined;
 
 function onResultsHands(results) {
-  //   canvasContext.save();
-  //   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-  //   canvasContext.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+  canvasContext.save();
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+  canvasContext.drawImage(results.image, 0, 0, canvas.width, canvas.height);
 
   landmarks = undefined;
   if (results.multiHandLandmarks && results.multiHandedness) {
     for (let index = 0; index < results.multiHandLandmarks.length; index++) {
       landmarks = results.multiHandLandmarks[index];
 
-      //   const classification = results.multiHandedness[index];
-      //   const isRightHand = classification.label === "Right";
+      const classification = results.multiHandedness[index];
+      const isRightHand = classification.label === "Right";
 
-      //   drawConnectors(canvasContext, landmarks, HAND_CONNECTIONS, {
-      //     color: isRightHand ? "#00FF00" : "#FF0000",
-      //   }),
-      //     drawLandmarks(canvasContext, landmarks, {
-      //       color: isRightHand ? "#00FF00" : "#FF0000",
-      //       fillColor: isRightHand ? "#FF0000" : "#00FF00",
-      //       radius: (x) => {
-      //         return lerp(x.from.z, -0.15, 0.1, 10, 1);
-      //       },
-      //     });
+      if (displayHandLandmarks) {
+        drawConnectors(canvasContext, landmarks, HAND_CONNECTIONS, {
+          color: isRightHand ? "#00FF00" : "#FF0000",
+        }),
+          drawLandmarks(canvasContext, landmarks, {
+            color: isRightHand ? "#00FF00" : "#FF0000",
+            fillColor: isRightHand ? "#FF0000" : "#00FF00",
+            radius: (x) => {
+              return lerp(x.from.z, -0.15, 0.1, 10, 1);
+            },
+          });
+      }
     }
   }
   canvasContext.restore();
@@ -166,13 +193,15 @@ new ControlPanel(document.createElement("div"), {
 });
 
 //////////////////////////////////////////////////////////////////////////
+let handNotDetectedCount = 0;
+const roundWaitDelay = 3000;
+const timerDelay = 1000;
 
 function game() {
   let count = 3;
   let timer = setInterval(function () {
-    handleTimer(count);
-  }, 1000);
-  const roundWait = 3000;
+    handleTimer();
+  }, timerDelay);
 
   function handleTimer() {
     if (count === 0) {
@@ -187,6 +216,8 @@ function game() {
 
       // Get prediction
       if (landmarks != undefined) {
+        handNotDetectedCount = 0;
+
         pred = randomForestClassifier(landmarks);
         console.log(pred);
 
@@ -248,12 +279,28 @@ function game() {
       } else {
         clearInterval(timer);
         computerToken.src = "images/outcomes/none.png";
+
+        // Stop if hand is not detected for 3 tries
+        handNotDetectedCount++;
+
+        if (handNotDetectedCount === 3) {
+          displayMessageViaModal("Unable to detect your hand! 😔", `
+          The current camera, lighting and/or background setup is preventing the application from detecting your hand. 
+          Please try again after moving to a well lit area or use a better camera. 
+          `)
+          computerToken.src = "images/blank.png";
+          startButton.disabled = false;
+          stopButton.disabled = true;
+        }
       }
 
       // Restart counter
-      setTimeout(function () {
-        game();
-      }, roundWait);
+      if (handNotDetectedCount !== 3) {
+        setTimeout(function () {
+          game();
+        }, roundWaitDelay);
+      }
+
     } else {
       computerToken.src = `images/${count}.png`;
       count--;
