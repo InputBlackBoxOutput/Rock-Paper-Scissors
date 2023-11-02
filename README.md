@@ -6,7 +6,9 @@ Play the game at https://rock-paper-scissor-cv.netlify.app/
 
 Once the page is loaded, the game requests access to your web camera when you press the play button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to obtain hand landmarks. When the 3-second timer runs out, a Random Forest Classifier will use the obtained hand landmarks and try its best to predict your token. The predicted token is compared with the choice simultaneously made by the computer, and the scoreboard is updated accordingly
 
-![](www/images/process.drawio.png)
+![](process.drawio.png)
+
+Double click on start when starting the game to see hand landmarks!
 
 ## Building the classifier
 

@@ -20,113 +20,90 @@
 </head>
 
 <body>
-    <script>
-        // Check if device is a mobile device
-        if (
-            navigator.userAgent.match(/Android/i) ||
-            navigator.userAgent.match(/webOS/i) ||
-            navigator.userAgent.match(/iPhone/i) ||
-            navigator.userAgent.match(/iPod/i)
-        ) {
-            location.replace("mobile.html");
-        }
-    </script>
-
-    <nav class="navbar navbar-expand-lg" id="navbar">
-        <a class="navbar-brand text-white" id="title" href="https://rock-paper-scissor-cv.netlify.app/">
-            <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
-            Rock Paper Scissors
-        </a>
-
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
-            data-target="#navbar-collapse-button" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbar-collapse-button">
-            <div class="navbar-nav ml-auto">
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="help-button"> Help </label>
-                <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="about-button"> About </label>
+    <div id="page-container">
+        <div id="content-wrap">
+            <script>
+                // Check if device is a mobile device
+                if (
+                    navigator.userAgent.match(/Android/i) ||
+                    navigator.userAgent.match(/webOS/i) ||
+                    navigator.userAgent.match(/iPhone/i) ||
+                    navigator.userAgent.match(/iPod/i)
+                ) {
+                    location.replace("mobile.html");
+                }
+            </script>
+            
+            <nav class="navbar navbar-expand-lg" id="navbar">
+                <a class="navbar-brand text-white" id="title" href="https://rock-paper-scissor-cv.netlify.app/">
+                    <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
+                    Rock Paper Scissors
+                </a>
+            
+                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                    data-target="#navbar-collapse-button" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            
+                <div class="collapse navbar-collapse" id="navbar-collapse-button">
+                    <div class="navbar-nav ml-auto">
+                        <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="help-button"> Help </label>
+                        <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="about-button"> About </label>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="container">
+                <div class="col">
+                    <div class="row d-flex justify-content-center my-3">
+                        <span id="score-board" class="text-center mr-2 pt-2 px-2">
+                            Computer: <label class="mr-3" id="score-computer">0</label>
+                            Player: <label id="score-player">0</label>
+                        </span>
+                        <div class="control-btn-div mr-2">
+                            <button id='start' class="btn btn-lg btn-success"> Start </button>
+                        </div>
+                        <div class="control-btn-div">
+                            <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
+                        </div>
+                    </div>
+                    <div class="row d-flex justify-content-center mb-3">
+                        <table>
+                            <tr>
+                                <td>
+                                    <img id="computer-token" src="images/blank.png" alt="Computer token">
+                                </td>
+                                <td>
+                                    <canvas id="canvas" width="620" height="460"></canvas>
+                                    <video id="webcam" autoplay hidden="true"></video>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-
-    <div class="container">
-        <div class="col">
-            <div class="row d-flex justify-content-center mt-3">
-                <span id="score-board" class="text-center mr-2 pt-2 px-2">
-                    Computer: <label class="mr-3" id="score-computer">0</label>
-                    Player: <label id="score-player">0</label>
-                </span>
-                <div class="control-btn-div mr-2">
-                    <button id='start' class="btn btn-lg btn-success"> Start </button>
+        <div id="footer">
+            <div class="container-fluid">
+                <div class="row py-1">
+                    <div id="footer-1" class="col-md-6">
+                        <label class="h6 m-0">
+                            <a href="legal/terms-and-conditions.html">Terms & Conditions</a> |
+                            <a href="legal/privacy-policy.html"> Privacy Policy </a>
+                        </label>
+                    </div>
+                    <div id="footer-2" class="col-md-6 text-right">
+                        <label class="h6 m-0">Copyright © 2022 InputBlackBoxOutput</label>
+                    </div>
                 </div>
-                <div class="control-btn-div">
-                    <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center mt-2">
-                <table>
-                    <tr>
-                        <td>
-                            <img id="computer-token" src="images/blank.png" alt="Computer token">
-                        </td>
-                        <td>
-                            <canvas id="canvas" width="620" height="460"></canvas>
-                            <video id="webcam" autoplay hidden="true"></video>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </div>
-    </div>
-
-    <div class="container-fluid mt-4">
-        <div class="row px-2 py-3">
-            <div class="col">
-                <div class="row">
-                    <h2> How it works? </h2>
-                    <p class="text-justify">
-                        Once the page is loaded, the game requests access to your web camera when you press the play
-                        button and begins taking snapshots. The snapshots are passed to the Mediapipe Hands Solution to
-                        obtain hand landmarks.
-                        When the 3-second timer runs out, a Random Forest Classifier will use the obtained hand
-                        landmarks and try its best to predict your token. The predicted token is compared with the
-                        choice simultaneously made by the computer, and the
-                        scoreboard is updated accordingly
-                    </p>
-                </div>
-                <br>
-                <div class="row d-flex justify-content-center">
-                    <img class="img-fluid" src="images/process.drawio.png" alt="Process flow">
-                </div>
-                <br>
-                <div class="row">
-                    <p>Double click on start when starting the game to see hand landmarks!</p>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid mt-1 pt-2 pb-1">
-        <div class="row">
-            <div id="footer-1" class="col-md-6 p-1">
-                <label class="h6 m-0">
-                    <a href="legal/terms-and-conditions.html">Terms & Conditions</a> |
-                    <a href="legal/privacy-policy.html"> Privacy Policy </a>
-                </label>
-            </div>
-            <div id="footer-2" class="col-md-6 p-1 text-right">
-                <label class="h6 m-0">Copyright © 2022 InputBlackBoxOutput</label>
             </div>
         </div>
     </div>
 
     <!--Generic modal-->
     <button id="show-modal" hidden="true" data-toggle="modal" data-target="#generic-modal"></button>
-
+    
     <div class="modal fade" id="generic-modal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -145,19 +122,18 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js"
-        crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils@0.1/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils@0.1/control_utils.js"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils@0.2/drawing_utils.js"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.1/hands.js" crossorigin="anonymous"></script>
-
+    
     <script type="text/javascript" src="https://chancejs.com/chance.min.js"></script>
     <script type="text/javascript" src="scripts/script.js"></script>
     <script type="text/javascript" src="scripts/rfc.js"></script>
-
+    
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
@@ -167,7 +143,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    </div>
 </body>
 
 </html>

@@ -48,13 +48,25 @@ canvas {
   border-radius: 10px;
 }
 
-#footer-1>label>a {
-  color: #006ee5;
-}
-
 #mobile {
   background-color: white;
   /* color: white; */
   text-align: center;
   margin-top: 10px;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
