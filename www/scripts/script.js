@@ -21,6 +21,20 @@ const helpButton = document.getElementById("help-button");
 const aboutButton = document.getElementById("about-button");
 
 //////////////////////////////////////////////////////////////////////////
+// Size canvas & computerToken image dynamically
+
+const imageSrcWidth = 620;
+const imageSrcHeight = 460;
+const navbarFooterHeight = 150;
+
+canvas.width = (window.innerWidth * (8 / 12)) - 10;
+canvas.height = window.innerHeight - navbarFooterHeight;
+
+
+computerToken.width = (window.innerWidth * (4 / 12)) - 10;
+computerToken.height = computerToken.width  * (imageSrcHeight / imageSrcWidth) ;
+
+//////////////////////////////////////////////////////////////////////////
 // Preload some of the images
 
 function preloadImages() {
@@ -83,8 +97,8 @@ const camera = new Camera(video, {
   onFrame: async () => {
     await hands.send({ image: video });
   },
-  width: 640,
-  height: 480,
+  width: canvas.width,
+  height: canvas.height,
 });
 
 //////////////////////////////////////////////////////////////////////////
@@ -148,7 +162,6 @@ function onResultsHands(results) {
   canvasContext.save();
   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
   canvasContext.drawImage(results.image, 0, 0, canvas.width, canvas.height);
-
 
   landmarks = undefined;
   if (results.multiHandLandmarks && results.multiHandedness) {

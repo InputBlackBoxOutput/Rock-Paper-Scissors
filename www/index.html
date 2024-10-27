@@ -51,32 +51,34 @@
             </div>
         </nav>
           
-        <div class="container-fluid mb-5 pb">
-            <div class="col">
-                <div class="row d-flex justify-content-center py-3">
-                    <span id="score-board" class="text-center mr-2 pt-2 px-4">
-                        Computer: <label class="mr-3" id="score-computer">0</label>
-                        Player: <label id="score-player">0</label>
-                    </span>
-                    <div class="mr-2">
-                        <button id='start' class="btn btn-lg btn-success"> Start </button>
+        <div class="container-fluid mb-5">
+            <div class="row">
+                <div class="col-4 py-3">
+                    <div class="row mb-2 d-flex justify-content-center">
+                        <span id="score-board" class="text-center mr-2 pt-2 px-4">
+                            Computer : <label class="mr-3" id="score-computer">0</label>
+                            Player : <label id="score-player">0</label>
+                        </span>
                     </div>
-                    <div>
-                        <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
+                    <div class="row mb-3 d-flex justify-content-center">
+                        <div class="col-6">
+                            <button id='start' class="btn btn-block btn-success"> Start </button>
+                        </div>
+                        <div class="col-6">
+                            <button id='stop' class="btn btn-block btn-danger"> Stop </button> 
+                        </div>
+                    </div>
+                    
+                    <div class="row d-flex justify-content-center">
+                        <img id="computer-token" src="images/blank.png" alt="Computer token">
                     </div>
                 </div>
-                <div class="row d-flex justify-content-center mb-3">
-                    <table>
-                        <tr>
-                            <td>
-                                <img id="computer-token" src="images/blank.png" alt="Computer token">
-                            </td>
-                            <td>
-                                <canvas id="canvas" width="620" height="460"></canvas>
-                                <video id="webcam" autoplay hidden="true"></video>
-                            </td>
-                        </tr>
-                    </table>
+                <!-- d-flex justify-content-center -->
+                <div class="col-8">
+                    <div class="d-flex justify-content-center p-2">
+                        <canvas id="canvas"></canvas>
+                        <video id="webcam" autoplay hidden="true"></video>
+                    </div>
                 </div>
             </div>
         </div>
