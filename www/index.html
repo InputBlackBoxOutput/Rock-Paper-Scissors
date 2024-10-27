@@ -20,86 +20,80 @@
 </head>
 
 <body>
-    <div id="page-container">
-        <div id="content-wrap">
-            <script>
-                // Check if device is a mobile device
-                if (
-                    navigator.userAgent.match(/Android/i) ||
-                    navigator.userAgent.match(/webOS/i) ||
-                    navigator.userAgent.match(/iPhone/i) ||
-                    navigator.userAgent.match(/iPod/i)
-                ) {
-                    location.replace("mobile.html");
-                }
-            </script>
+        <script>
+            // Check if device is a mobile device
+            if (
+                navigator.userAgent.match(/Android/i) ||
+                navigator.userAgent.match(/webOS/i) ||
+                navigator.userAgent.match(/iPhone/i) ||
+                navigator.userAgent.match(/iPod/i)
+            ) {
+                location.replace("mobile.html");
+            }
+        </script>
             
-            <nav class="navbar navbar-expand-lg" id="navbar">
-                <a class="navbar-brand text-white" id="title" href="https://rock-paper-scissor-cv.netlify.app/">
-                    <img class="mr-1" src="images/logo/logo.gif" alt="logo" id="logo">
-                    Rock Paper Scissors
-                </a>
-            
-                <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
-                    data-target="#navbar-collapse-button" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <div class="collapse navbar-collapse" id="navbar-collapse-button">
-                    <div class="navbar-nav ml-auto">
-                        <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="help-button"> Help </label>
-                        <label class="btn rounded btn-light mr-1 mt-1 mb-0" id="about-button"> About </label>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="https://rock-paper-scissor-cv.netlify.app/">
+                Rock Paper Scissors
+            </a>
+        
+            <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse"
+                data-target="#navbar-collapse-button" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbar-collapse-button">
+                <div class="navbar-nav ml-auto">
+                    <button class="btn btn-outline-light mr-1 my-2 my-sm-0" id="help-button"> Help </button>
+                    <button class="btn btn-outline-light mr-1 my-2 my-sm-0" id="about-button"> About </button>
+                </div>
+            </div>
+        </nav>
+          
+        <div class="container-fluid mb-5 pb">
+            <div class="col">
+                <div class="row d-flex justify-content-center py-3">
+                    <span id="score-board" class="text-center mr-2 pt-2 px-4">
+                        Computer: <label class="mr-3" id="score-computer">0</label>
+                        Player: <label id="score-player">0</label>
+                    </span>
+                    <div class="mr-2">
+                        <button id='start' class="btn btn-lg btn-success"> Start </button>
+                    </div>
+                    <div>
+                        <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
                     </div>
                 </div>
-            </nav>
-            
-            <div class="container">
-                <div class="col">
-                    <div class="row d-flex justify-content-center my-3">
-                        <span id="score-board" class="text-center mr-2 pt-2 px-2">
-                            Computer: <label class="mr-3" id="score-computer">0</label>
-                            Player: <label id="score-player">0</label>
-                        </span>
-                        <div class="control-btn-div mr-2">
-                            <button id='start' class="btn btn-lg btn-success"> Start </button>
-                        </div>
-                        <div class="control-btn-div">
-                            <button id='stop' class="btn btn-lg btn-danger"> Stop </button>
-                        </div>
-                    </div>
-                    <div class="row d-flex justify-content-center mb-3">
-                        <table>
-                            <tr>
-                                <td>
-                                    <img id="computer-token" src="images/blank.png" alt="Computer token">
-                                </td>
-                                <td>
-                                    <canvas id="canvas" width="620" height="460"></canvas>
-                                    <video id="webcam" autoplay hidden="true"></video>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+                <div class="row d-flex justify-content-center mb-3">
+                    <table>
+                        <tr>
+                            <td>
+                                <img id="computer-token" src="images/blank.png" alt="Computer token">
+                            </td>
+                            <td>
+                                <canvas id="canvas" width="620" height="460"></canvas>
+                                <video id="webcam" autoplay hidden="true"></video>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
-        <div id="footer">
-            <div class="container-fluid">
-                <div class="row py-1">
-                    <div id="footer-1" class="col-md-6">
-                        <label class="h6 m-0">
-                            <a href="legal/terms-and-conditions.html">Terms & Conditions</a> |
-                            <a href="legal/privacy-policy.html"> Privacy Policy </a>
-                        </label>
-                    </div>
-                    <div id="footer-2" class="col-md-6 text-right">
-                        <label class="h6 m-0">Copyright © 2022 InputBlackBoxOutput</label>
-                    </div>
+
+        <div class="container-fluid pt-1" id="footer">
+            <div class="row py-1">
+                <div id="footer-1" class="col-md-6">
+                    <label class="h6 m-0">
+                        <a href="legal/terms-and-conditions.html">Terms & Conditions</a> |
+                        <a href="legal/privacy-policy.html"> Privacy Policy </a>
+                    </label>
+                </div>
+                <div id="footer-2" class="col-md-6 text-right">
+                    <label class="h6 m-0">Copyright © 2022 InputBlackBoxOutput</label>
                 </div>
             </div>
         </div>
-    </div>
 
     <!--Generic modal-->
     <button id="show-modal" hidden="true" data-toggle="modal" data-target="#generic-modal"></button>

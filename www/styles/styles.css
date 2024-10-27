@@ -1,44 +1,20 @@
+html {
+  background-color: #F0F0F0;
+}
+
 body {
   font-family: "Roboto", sans-serif !important;
-  background-image: url("../images/background.webp");
 }
 
 .container-fluid {
-  background-color: white;
-}
-
-#title {
-  font-size: 30px;
-}
-
-#logo {
-  border: black 1px solid;
-  border-radius: 10%;
-  width: 45px;
-  height: 45px;
-}
-
-#navbar {
-  background-color: rgb(36, 31, 40);
-}
-
-.control-btn-div {
-  background-color: rgb(21, 16, 25);
+  background-color: #F0F0F0;
 }
 
 canvas {
+  background-color: white;
   margin-top: 7px;
   width: 620px;
   height: 460px;
-
-  background-color: lightgray;
-  border-radius: 5px;
-}
-
-#computer-token {
-  width: 620px;
-  height: 460px;
-
   border-radius: 5px;
 }
 
@@ -48,23 +24,17 @@ canvas {
   border-radius: 10px;
 }
 
-#mobile {
-  background-color: white;
-  /* color: white; */
-  text-align: center;
-  margin-top: 10px;
+#computer-token {
+  width: 620px;
+  height: 460px;
+  border-radius: 5px;
+  margin-right: 10px;
 }
 
-#page-container {
-  position: relative;
-  min-height: 100vh;
-}
 
-#content-wrap {
-  padding-bottom: 2.5rem;
-}
 
 #footer {
+  background-color: white;
   position: absolute;
   bottom: 0;
   width: 100%;
