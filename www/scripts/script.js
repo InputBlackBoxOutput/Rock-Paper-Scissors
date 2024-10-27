@@ -139,6 +139,7 @@ stopButton.addEventListener("click", () => {
   location.reload();
 });
 
+
 //////////////////////////////////////////////////////////////////////////
 // Setup hand pose estimation
 let landmarks = undefined;
@@ -147,6 +148,7 @@ function onResultsHands(results) {
   canvasContext.save();
   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
   canvasContext.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+
 
   landmarks = undefined;
   if (results.multiHandLandmarks && results.multiHandedness) {
@@ -188,7 +190,6 @@ new ControlPanel(document.createElement("div"), {
   minTrackingConfidence: 0.75,
 }).on((options) => {
   video.classList.toggle("selfie", options.selfieMode);
-  // console.log(options);
   hands.setOptions(options);
 });
 
@@ -218,10 +219,10 @@ function game() {
       if (landmarks != undefined) {
         handNotDetectedCount = 0;
 
-        pred = randomForestClassifier(landmarks);
-        console.log(pred);
+        prediction = randomForestClassifier(landmarks);
+        console.log(`Random forest classifier prediction: ${prediction}`);
 
-        if (pred === "P") {
+        if (prediction === "P") {
           switch (token) {
             case 1:
               computerToken.src = "images/outcomes/paper-paper.png";
@@ -239,7 +240,7 @@ function game() {
 
           scorePlayer.innerText = scoreP;
           scoreComputer.innerText = scoreC;
-        } else if (pred === "R") {
+        } else if (prediction === "R") {
           switch (token) {
             case 1:
               computerToken.src = "images/outcomes/paper-rock.png";
@@ -257,7 +258,7 @@ function game() {
 
           scorePlayer.innerText = scoreP;
           scoreComputer.innerText = scoreC;
-        } else if (pred == "S") {
+        } else if (prediction == "S") {
           switch (token) {
             case 1:
               computerToken.src = "images/outcomes/paper-scissors.png";

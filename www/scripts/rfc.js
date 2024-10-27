@@ -1,3 +1,5 @@
+// Random Forest Classifier that performs the Rock-Paper-Scissors classification
+
 function randomForestClassifier(landmarks) {
   x = [];
   for (let i = 0; i < landmarks.length; i++) {
@@ -77,8 +79,6 @@ function randomForestClassifier(landmarks) {
       continue;
     }
   }
-
-  console.log(count_P, count_R, count_S);
 
   if (count_P > count_R && count_P > count_S)
     return 'P';
