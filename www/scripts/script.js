@@ -103,7 +103,6 @@ const camera = new Camera(video, {
 
 //////////////////////////////////////////////////////////////////////////
 // Setup game control buttons
-let numClicks = 0;
 let displayHandLandmarks = false;
 
 function start() {
@@ -129,26 +128,9 @@ function start() {
   handNotDetectedCount = 0;
 }
 
-function handleClick() {
-  numClicks++;
-  if (numClicks === 1) {
-    singleClickTimer = setTimeout(() => {
-      numClicks = 0;
-
-      displayHandLandmarks = false;
-      start();
-
-    }, 400);
-  } else if (numClicks === 2) {
-    clearTimeout(singleClickTimer);
-    numClicks = 0;
-
-    displayHandLandmarks = true;
-    start();
-  }
-};
-startButton.addEventListener("click", handleClick);
-
+startButton.addEventListener("click", () => {
+  start();
+});
 stopButton.addEventListener("click", () => {
   location.reload();
 });
@@ -171,18 +153,16 @@ function onResultsHands(results) {
       const classification = results.multiHandedness[index];
       const isRightHand = classification.label === "Right";
 
-      if (displayHandLandmarks) {
-        drawConnectors(canvasContext, landmarks, HAND_CONNECTIONS, {
+      drawConnectors(canvasContext, landmarks, HAND_CONNECTIONS, {
+        color: isRightHand ? "#00FF00" : "#FF0000",
+      }),
+        drawLandmarks(canvasContext, landmarks, {
           color: isRightHand ? "#00FF00" : "#FF0000",
-        }),
-          drawLandmarks(canvasContext, landmarks, {
-            color: isRightHand ? "#00FF00" : "#FF0000",
-            fillColor: isRightHand ? "#FF0000" : "#00FF00",
-            radius: (x) => {
-              return lerp(x.from.z, -0.15, 0.1, 10, 1);
-            },
-          });
-      }
+          fillColor: isRightHand ? "#FF0000" : "#00FF00",
+          radius: (x) => {
+            return lerp(x.from.z, -0.15, 0.1, 10, 1);
+          },
+        });
     }
   }
   canvasContext.restore();
