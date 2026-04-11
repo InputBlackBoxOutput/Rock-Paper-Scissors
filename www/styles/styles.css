@@ -11,21 +11,94 @@ body {
 }
 
 canvas {
-  background-color: white;
-  margin-top: 7px;
-  border-radius: 5px;
+  width: 100%;
+  background-color: #f6f8fb;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(43, 57, 79, 0.14);
 }
 
 #score-board {
   width: 100%;
   font-size: 22px;
-  background-color: white;
+}
+
+.score-board-card {
+  padding: 12px;
+  background-color: #f6f8fb;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(43, 57, 79, 0.14);
+}
+
+.score-cards-row {
+  margin-bottom: 12px;
+}
+
+.score-box {
+  padding: 12px 10px;
   border-radius: 10px;
 }
 
+.score-box-computer {
+  background: linear-gradient(145deg, #d3e2f6 0%, #c5d4ea 100%);
+}
+
+.score-box-player {
+  background: linear-gradient(145deg, #d7efdf 0%, #c8e6d2 100%);
+}
+
+.score-label {
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #2a3340;
+  line-height: 1.1;
+}
+
+.score-value {
+  display: inline-block;
+  min-width: 68px;
+  margin: 0;
+  padding: 4px 18px;
+  border-radius: 10px;
+  color: #f3f9ff;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-value-computer {
+  background: linear-gradient(145deg, #57a8ef 0%, #408fd8 100%);
+}
+
+.score-value-player {
+  background: linear-gradient(145deg, #30ba7d 0%, #1ea86f 100%);
+}
+
+.score-actions-row {
+  margin: 10px 0px;
+}
+
+.score-action-button {
+  border-radius: 8px !important;
+  border: 0 !important;
+  font-size: 24px !important;
+}
+
+#start.score-action-button {
+  background: linear-gradient(180deg, #19b66d 0%, #129b5d 100%) !important;
+  box-shadow: 0 4px 10px rgba(17, 143, 87, 0.35);
+}
+
+#stop.score-action-button {
+  background: linear-gradient(180deg, #f17886 0%, #e96073 100%) !important;
+  box-shadow: 0 4px 10px rgba(181, 72, 88, 0.32);
+}
+
 #computer-token {
-  border-radius: 5px;
-  margin-right: 10px;
+  width: 100%;
+  background-color: #f6f8fb;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(43, 57, 79, 0.14);
 }
 
 #footer {

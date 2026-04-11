@@ -11,6 +11,7 @@ const scorePlayer = document.querySelector("#score-player");
 const video = document.querySelector("#webcam");
 const startButton = document.querySelector("#start");
 const stopButton = document.querySelector("#stop");
+let access = undefined;
 startButton.disabled = false;
 stopButton.disabled = true;
 
@@ -69,23 +70,23 @@ function displayMessageViaModal(messageTitle, messageContent) {
 }
 
 aboutButton.addEventListener('click', () => {
-  displayMessageViaModal("About", `
-   <p>A website to play Rock Paper Scissors against a computer using the magic of computer vision</p>
-    <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors">See repository
-        on GitHub</a>
-    <p>Created by Rutuparn Pawar [InputBlackBoxOutput]</p>
-  `);
+  displayMessageViaModal(
+    "About",
+    `
+      <p> A website to play a game of rock paper scissors against a computer using the magic of computer vision </p>
+      <a target="_blank" href="https://github.com/InputBlackBoxOutput/Rock-Paper-Scissors"> See repository on GitHub</a>
+      <p> Created by InputBlackBoxOutput </p>
+    `
+  );
 })
 
 helpButton.addEventListener('click', () => {
   displayMessageViaModal("How to play?", `
     <ol>
-        <li>Press the Start button and wait until the game setup is complete.</li>
-        <li>When the 3-second timer starts, make a choice and show your hand to your webcam before the
-            timer runs out</li>
-        <li>The computer will show its choice and then compare it with your choice to find the winner
-        </li>
-        <li>If you want to stop the game press the Stop button</li>
+        <li> Press the start button and wait until the game setup is complete </li>
+        <li> When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out </li>
+        <li> The computer will show its choice and then compare it with your choice to find the winner </li>
+        <li> Press the stop button anytime to stop the game </li>
     </ol>
   `);
 })
@@ -105,8 +106,57 @@ const camera = new Camera(video, {
 // Setup game control buttons
 let displayHandLandmarks = false;
 
+function getCameraErrorModalContent(error) {
+  if (error && error.name === "NotFoundError") {
+    return {
+      title: "Camera not found",
+      content: "No camera was found on this device. Connect a webcam and press start again.",
+    };
+  }
+
+  if (error && error.name === "NotAllowedError") {
+    return {
+      title: "Permission required!",
+      content: "Camera access is required to play the game. Please reload the page, press the start button and allow camera access.",
+    };
+  }
+
+  return {
+    title: "Camera unavailable",
+    content: "The camera could not be started. Check that it is connected, available, and not being used by another application, then try again.",
+  };
+}
+
+function startCameraAccess() {
+  const originalAlert = window.alert;
+
+  window.alert = (message) => {
+    if (typeof message === "string" && message.startsWith("Failed to acquire camera feed:")) {
+      return;
+    }
+
+    originalAlert.call(window, message);
+  };
+
+  try {
+    const accessPromise = camera.start();
+
+    if (accessPromise && typeof accessPromise.finally === "function") {
+      return accessPromise.finally(() => {
+        window.alert = originalAlert;
+      });
+    }
+
+    window.alert = originalAlert;
+    return Promise.resolve(accessPromise);
+  } catch (error) {
+    window.alert = originalAlert;
+    throw error;
+  }
+}
+
 function start() {
-  access = camera.start();
+  access = startCameraAccess();
 
   access
     .then((e) => {
@@ -115,11 +165,12 @@ function start() {
         game();
       }, 7000);
     })
-    .catch((e) => {
+    .catch((error) => {
       startButton.disabled = false;
       stopButton.disabled = true;
 
-      displayMessageViaModal("Permission required!", "Camera access is required to play the game. Please reload the page, press the start button and allow camera access");
+      const modalContent = getCameraErrorModalContent(error);
+      displayMessageViaModal(modalContent.title, modalContent.content);
     });
 
   startButton.disabled = true;
