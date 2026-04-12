@@ -43,19 +43,19 @@ function preloadImages() {
 
   for (let i = 0; i < 10; i++) images[i] = new Image();
 
-  images[1].src = "images/outcomes/paper-paper.png";
-  images[2].src = "images/outcomes/paper-rock.png";
-  images[3].src = "images/outcomes/paper-scissors.png";
+  images[1].src = "images/outcomes/paper-paper.svg";
+  images[2].src = "images/outcomes/paper-rock.svg";
+  images[3].src = "images/outcomes/paper-scissors.svg";
 
-  images[4].src = "images/outcomes/rock-paper.png";
-  images[5].src = "images/outcomes/rock-rock.png";
-  images[6].src = "images/outcomes/rock-scissors.png";
+  images[4].src = "images/outcomes/rock-paper.svg";
+  images[5].src = "images/outcomes/rock-rock.svg";
+  images[6].src = "images/outcomes/rock-scissors.svg";
 
-  images[7].src = "images/outcomes/scissors-paper.png";
-  images[8].src = "images/outcomes/scissors-rock.png";
-  images[9].src = "images/outcomes/scissors-scissors.png";
+  images[7].src = "images/outcomes/scissors-paper.svg";
+  images[8].src = "images/outcomes/scissors-rock.svg";
+  images[9].src = "images/outcomes/scissors-scissors.svg";
 
-  images[0].src = "images/outcomes/none.png";
+  images[0].src = "images/outcomes/none.svg";
 }
 
 preloadImages();
@@ -81,14 +81,17 @@ aboutButton.addEventListener('click', () => {
 })
 
 helpButton.addEventListener('click', () => {
-  displayMessageViaModal("How to play?", `
-    <ol>
-        <li> Press the start button and wait until the game setup is complete </li>
-        <li> When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out </li>
-        <li> The computer will show its choice and then compare it with your choice to find the winner </li>
-        <li> Press the stop button anytime to stop the game </li>
-    </ol>
-  `);
+  displayMessageViaModal(
+    "How to play?",
+    `
+      <ol>
+          <li> Press the start button and wait until the game setup is complete </li>
+          <li> When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out </li>
+          <li> The computer will show its choice and then compare it with your choice to find the winner </li>
+          <li> Press the stop button anytime to stop the game </li>
+      </ol>
+    `
+  );
 })
 
 
@@ -109,21 +112,33 @@ let displayHandLandmarks = false;
 function getCameraErrorModalContent(error) {
   if (error && error.name === "NotFoundError") {
     return {
-      title: "Camera not found",
-      content: "No camera was found on this device. Connect a webcam and press start again.",
+      title: '<i class="bi bi-exclamation-triangle mr-2" aria-hidden="true"></i>Camera not found!',
+      content: `
+        No camera was found on this device
+        <br/><br/>
+        Please check if your camera is properly connected
+      `,
     };
   }
 
   if (error && error.name === "NotAllowedError") {
     return {
-      title: "Permission required!",
-      content: "Camera access is required to play the game. Please reload the page, press the start button and allow camera access.",
+      title: '<i class="bi bi-exclamation-triangle mr-2" aria-hidden="true"></i>Permission required!',
+      content: `
+      Camera access is required to play the game. Please reload the page and allow camera access when prompted. 
+      <br/><br/>
+      If you accidentally denied access, you can change this in your browser settings.
+    `,
     };
   }
 
   return {
-    title: "Camera unavailable",
-    content: "The camera could not be started. Check that it is connected, available, and not being used by another application, then try again.",
+    title: '<i class="bi bi-exclamation-triangle mr-2" aria-hidden="true"></i>Camera unavailable!',
+    content: ` 
+    The camera could not be started.
+    <br/><br/>
+    Check that it is connected, available, and not being used by another application, then try again.
+    `,
   };
 }
 
@@ -160,7 +175,7 @@ function start() {
 
   access
     .then((e) => {
-      computerToken.src = "images/setup.png";
+      computerToken.src = "images/setup.svg";
       setTimeout(function () {
         game();
       }, 7000);
@@ -255,9 +270,9 @@ function game() {
       // Show computer token // 1:'paper', 2:'rock', 3:'scissors'
       token = chance.integer({ min: 1, max: 3 });
 
-      if (token == 1) computerToken.src = "images/paper.png";
-      else if (token == 2) computerToken.src = "images/rock.png";
-      else computerToken.src = "images/scissors.png";
+      if (token == 1) computerToken.src = "images/paper.svg";
+      else if (token == 2) computerToken.src = "images/rock.svg";
+      else computerToken.src = "images/scissors.svg";
 
       // Get prediction
       if (landmarks != undefined) {
@@ -269,13 +284,13 @@ function game() {
         if (prediction === "P") {
           switch (token) {
             case 1:
-              computerToken.src = "images/outcomes/paper-paper.png";
+              computerToken.src = "images/outcomes/paper-paper.svg";
               break;
             case 2:
-              computerToken.src = "images/outcomes/rock-paper.png";
+              computerToken.src = "images/outcomes/rock-paper.svg";
               break;
             case 3:
-              computerToken.src = "images/outcomes/scissors-paper.png";
+              computerToken.src = "images/outcomes/scissors-paper.svg";
               break;
           }
 
@@ -287,13 +302,13 @@ function game() {
         } else if (prediction === "R") {
           switch (token) {
             case 1:
-              computerToken.src = "images/outcomes/paper-rock.png";
+              computerToken.src = "images/outcomes/paper-rock.svg";
               break;
             case 2:
-              computerToken.src = "images/outcomes/rock-rock.png";
+              computerToken.src = "images/outcomes/rock-rock.svg";
               break;
             case 3:
-              computerToken.src = "images/outcomes/scissors-rock.png";
+              computerToken.src = "images/outcomes/scissors-rock.svg";
               break;
           }
 
@@ -305,13 +320,13 @@ function game() {
         } else if (prediction == "S") {
           switch (token) {
             case 1:
-              computerToken.src = "images/outcomes/paper-scissors.png";
+              computerToken.src = "images/outcomes/paper-scissors.svg";
               break;
             case 2:
-              computerToken.src = "images/outcomes/rock-scissors.png";
+              computerToken.src = "images/outcomes/rock-scissors.svg";
               break;
             case 3:
-              computerToken.src = "images/outcomes/scissors-scissors.png";
+              computerToken.src = "images/outcomes/scissors-scissors.svg";
               break;
           }
 
@@ -323,17 +338,21 @@ function game() {
         }
       } else {
         clearInterval(timer);
-        computerToken.src = "images/outcomes/none.png";
+        computerToken.src = "images/outcomes/none.svg";
 
         // Stop if hand is not detected for 3 tries
         handNotDetectedCount++;
 
         if (handNotDetectedCount === 3) {
-          displayMessageViaModal("Unable to detect your hand! 😔", `
-          The current camera, lighting and/or background setup is preventing the application from detecting your hand. 
-          Please try again after moving to a well lit area or use a better camera. 
-          `)
-          computerToken.src = "images/blank.png";
+          displayMessageViaModal(
+            '<i class="bi bi-exclamation-triangle mr-2" aria-hidden="true"></i>Unable to detect your hand!',
+            `
+              We couldn't detect your hand because of the current camera, lighting, or background conditions.
+              <br/><br/>
+              Move to a well-lit area, keep your hand clearly visible, and try again.
+            `,
+          );
+          computerToken.src = "images/blank.svg";
           startButton.disabled = false;
           stopButton.disabled = true;
         }
@@ -347,7 +366,7 @@ function game() {
       }
 
     } else {
-      computerToken.src = `images/${count}.png`;
+      computerToken.src = `images/${count}.svg`;
       count--;
     }
   }
