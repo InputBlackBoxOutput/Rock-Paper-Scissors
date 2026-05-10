@@ -84,12 +84,10 @@ helpButton.addEventListener('click', () => {
   displayMessageViaModal(
     "How to play?",
     `
-      <ol>
-          <li> Press the start button and wait until the game setup is complete </li>
-          <li> When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out </li>
-          <li> The computer will show its choice and then compare it with your choice to find the winner </li>
-          <li> Press the stop button anytime to stop the game </li>
-      </ol>
+    <p> Press the start button and wait until the game setup is complete </p>
+    <p> When the 3-second timer starts, make a choice and show your hand to your webcam before the timer runs out </p>
+    <p> The computer will show its choice and then compare it with your choice to find the winner </p>
+    <p> Press the stop button anytime to stop the game </p>
     `
   );
 })
